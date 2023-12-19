@@ -1,10 +1,13 @@
 import express from "express"
 import { Router } from "express"
+import userRouter from "./user.js"
 const indexRouter = Router()
 
 indexRouter.use('/static', express.static('./static'))
 
-indexRouter.post('/user', (req, res)=>{
+indexRouter.use('/user', userRouter)
+
+indexRouter.use('test', (req, res)=>{
     console.log(req.body);
     res.sendStatus(200)
 })

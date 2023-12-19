@@ -1,2 +1,5 @@
 node_modules
 static
+private
+test/test_bcrypt.js
+test/test0.js

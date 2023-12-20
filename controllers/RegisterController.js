@@ -9,23 +9,19 @@ class RegisterController{
      * @param {express.Response} res 
      */
     static async register(req, res) {
-        //console.log(req.body);
         const username = req.body.email
         const userDB = await TestFileService.fileReadObject()
 
-
-        userDB.forEach(element => {
+        // Check if user already exists
+        for(let element of userDB){
             if(element.user == username ){
+                res.status(409).send("User already exists")
                 return
-                return res.sendStatus(409).send({
-                    error: "已註冊"
-                })
             }
-        });
-
+        }
         const hashedPwd = await AuthService.hashPassword(req.body.password)
 
-    
+        // Add user to DB
         userDB.push({
             user: username, 
             password: hashedPwd
@@ -35,7 +31,9 @@ class RegisterController{
         console.log(userDB);
         
         res.sendStatus(200)
+    
     }
+   
 }
 
 export default RegisterController

@@ -2,6 +2,7 @@ import { Router } from "express";
 import session from "express-session"
 import session_key from "../private/session_key.js"
 import RegisterController from "../controllers/RegisterController.js";
+import LoginController from "../controllers/LoginController.js";
 const userRouter = Router()
 
 userRouter.use(session({
@@ -15,6 +16,7 @@ userRouter.get('/login', (req, res)=>{
 })
 
 userRouter.post('/register', RegisterController.register)
+userRouter.post('/login', LoginController.login)
 
 
 export default userRouter

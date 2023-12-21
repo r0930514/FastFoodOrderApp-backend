@@ -13,6 +13,7 @@ newsRouter.get("/", (req, res) => {
     let news = JSON.parse(data);
     res.json(news);
   })
+  console.log("news");
 })
 
 export default newsRouter;

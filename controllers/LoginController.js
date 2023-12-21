@@ -2,7 +2,9 @@ import express from "express"
 import AuthService from "../service/AuthService.js"
 import TestFileService from "../service/TestFileService.js"
 
+
 class LoginController {
+
     /**
     * @async
     * @param {express.Request} req 
@@ -15,10 +17,10 @@ class LoginController {
         const userDB = await TestFileService.fileReadObject()
 
         // Check if user already exists
-        for(let element of userDB){
-            if(element.user == username ){
+        for (let element of userDB) {
+            if (element.user == username) {
                 const isPasswordCorrect = await AuthService.comparePassword(password, element.password)
-                if(isPasswordCorrect){
+                if (isPasswordCorrect) {
                     req.session.user = username
                     res.sendStatus(200)
                     return

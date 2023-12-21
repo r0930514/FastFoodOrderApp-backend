@@ -11,7 +11,7 @@ userRouter.use(session({
     saveUninitialized: true,
 }))
 
-userRouter.get('/login', (req, res)=>{
+userRouter.get('/login', (req, res) => {
     res.send(session_key)
 })
 

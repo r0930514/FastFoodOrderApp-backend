@@ -1,0 +1,44 @@
+[
+    {
+        "news_id": "1",
+        "news_title": "大漢堡大特價！！",
+        "news_content": "新開幕只要20元",
+        "news_image_id": "/static/images/news/1.jpg"
+    },
+    {
+        "news_id": "2",
+        "news_title": "使用優惠券只要5折！！",
+        "news_content": "5折優惠券現在辦會員直接拿",
+        "news_image_id": "/static/images/news/2.jpg"
+    },
+    {
+        "news_id": "3",
+        "news_title": "新店開幕特惠",
+        "news_content": "全店商品八折優惠",
+        "news_image_id": "/static/images/news/3.jpg"
+    },
+    {
+        "news_id": "4",
+        "news_title": "特價午餐限時優惠",
+        "news_content": "平日午餐時間限定特價優惠",
+        "news_image_id": "/static/images/news/4.jpg"
+    },
+    {
+        "news_id": "5",
+        "news_title": "新品上市！",
+        "news_content": "限時優惠，快來品嚐",
+        "news_image_id": "/static/images/news/5.jpg"
+    },
+    {
+        "news_id": "6",
+        "news_title": "特別優惠活動",
+        "news_content": "週末限定，全店商品九折",
+        "news_image_id": "/static/images/news/6.jpg"
+    },
+    {
+        "news_id": "7",
+        "news_title": "會員專屬優惠",
+        "news_content": "會員專屬折扣，更多驚喜等你",
+        "news_image_id": "/static/images/news/7.jpg"
+    }
+]

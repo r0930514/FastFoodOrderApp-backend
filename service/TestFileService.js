@@ -1,6 +1,6 @@
 import fs from "fs"
 class TestFileService{
-    static path = "./private/acpwd.json"
+    static path = "./private/user_data.json"
     static async objectWriteFile(object){
         await fs.writeFileSync(this.path, JSON.stringify(object))
     }

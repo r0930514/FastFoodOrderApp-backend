@@ -1,8 +1,5 @@
 node_modules
-static
 private
-test
 logs
-food_SQL.sql
+.env
 .DS_Store
-config

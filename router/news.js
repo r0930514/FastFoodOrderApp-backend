@@ -5,7 +5,7 @@ const newsRouter = Router();
 
 
 newsRouter.get("/", (req, res) => {
-  fs.readFile("./private/news.json", (err, data) => {
+  fs.readFile("./static/news/news.json", (err, data) => {
     if (err) {
       logger.error(err.message);
       res.sendStatus(500);
@@ -14,7 +14,7 @@ newsRouter.get("/", (req, res) => {
     let news = JSON.parse(data);
     res.json(news);
   })
-  logger.info("news");
+  logger.info("getNews!");
 })
 
 export default newsRouter;

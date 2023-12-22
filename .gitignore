@@ -4,3 +4,5 @@ private
 test
 logs
 food_SQL.sql
+.DS_Store
+config

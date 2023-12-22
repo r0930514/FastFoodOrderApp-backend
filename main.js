@@ -1,6 +1,7 @@
 import express from "express"
 import indexRouter from "./router/index.js"
-import logger from "./utils/log.js"
+import logger from "./utils/logger.js"
+import DatabaseService from "./service/DatabaseService.js"
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({
@@ -9,7 +10,9 @@ app.use(express.urlencoded({
 
 app.use('/debug', indexRouter)
 
+DatabaseService.test();
+
 app.listen(3000, ()=>{
-    console.log("Hello")
+    logger.info("Server started on port 3000")
 })
 

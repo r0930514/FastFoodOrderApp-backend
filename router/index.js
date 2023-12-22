@@ -10,6 +10,8 @@ indexRouter.use('/static', express.static('./static'))
 
 indexRouter.use('/user', userRouter)
 indexRouter.use('/news', newsRouter)
+indexRouter.use('/products', )
+
 
 indexRouter.use('/test', (req, res) => {
     logger.http("test")

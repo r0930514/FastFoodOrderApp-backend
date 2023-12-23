@@ -3,6 +3,7 @@ import { Router } from "express"
 import userRouter from "./user.js"
 import newsRouter from "./news.js"
 import logger from "../utils/logger.js"
+import productRouter from "./product.js"
 const indexRouter = Router()
 
 
@@ -10,7 +11,7 @@ indexRouter.use('/static', express.static('./static'))
 
 indexRouter.use('/user', userRouter)
 indexRouter.use('/news', newsRouter)
-indexRouter.use('/products', )
+indexRouter.use('/products', productRouter)
 
 
 indexRouter.use('/test', (req, res) => {

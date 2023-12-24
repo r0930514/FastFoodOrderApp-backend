@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS public."Products"
     PRIMARY KEY (product_id)
 );
 
+
 -- 規格表
 CREATE TABLE IF NOT EXISTS public."Products_Specification"
 (

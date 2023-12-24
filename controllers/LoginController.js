@@ -1,5 +1,5 @@
 import express from "express"
-import AuthService from "../service/AuthService.js"
+import AuthService from "../services/AuthService.js"
 import logger from "../utils/logger.js"
 import UserModel from "../models/UserModel.js"
 

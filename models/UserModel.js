@@ -1,7 +1,8 @@
-import DatabaseSercie from '../service/DatabaseService.js';
+import DatabaseSercie from '../services/DatabaseService.js';
 import logger from '../utils/logger.js';
 class UserModel {
     /**
+     * 檢查帳號密碼是否存在並回傳正確密碼
      * @param {String} userphone 
      * @returns {String | Boolean} 回傳密碼或false(沒有此帳號)
      */
@@ -16,7 +17,14 @@ class UserModel {
         }
     }
 
-    static async register(name ,userphone, password) {
+    /**
+     * 註冊
+     * @param {String} name 
+     * @param {String} userphone 
+     * @param {String} password 
+     * @returns {Boolean}
+     */
+    static async register(name, userphone, password) {
         try {
             await DatabaseSercie.sql`INSERT INTO public."Member" (member_name, member_phone, member_password) VALUES (${name.toString()}, ${userphone.toString()}, ${password.toString()});`
             return true;

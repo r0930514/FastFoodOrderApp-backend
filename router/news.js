@@ -14,7 +14,6 @@ newsRouter.get("/", (req, res) => {
     let news = JSON.parse(data);
     res.json(news);
   })
-  logger.info("getNews!");
 })
 
 export default newsRouter;

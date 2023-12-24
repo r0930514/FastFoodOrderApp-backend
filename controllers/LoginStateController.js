@@ -16,6 +16,7 @@ class LoginStateController {
             res.sendStatus(401)
         }
     }
+
 }
 
 export default LoginStateController

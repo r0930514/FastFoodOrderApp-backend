@@ -5,7 +5,7 @@ const newsRouter = Router();
 
 
 newsRouter.get("/", (req, res) => {
-  fs.readFile("./static/news/news.json", (err, data) => {
+  fs.readFile("./static/news.json", (err, data) => {
     if (err) {
       logger.error(err.message);
       res.sendStatus(500);

@@ -1,0 +1,30 @@
+import DatabaseSercie from '../service/DatabaseService.js';
+import logger from '../utils/logger.js';
+class UserModel {
+    /**
+     * @param {String} userphone 
+     * @returns {String | Boolean} 回傳密碼或false(沒有此帳號)
+     */
+    static async checkUserExist(userphone) {
+        try {
+            let result = await DatabaseSercie.sql`SELECT * FROM public."Member" WHERE member_phone = ${userphone};`
+            if (result.length == 0) throw new Error("No such user");
+            return result[0].member_password;
+        } catch (error) {
+            logger.warn(error.message);
+            return false;
+        }
+    }
+
+    static async register(name ,userphone, password) {
+        try {
+            await DatabaseSercie.sql`INSERT INTO public."Member" (member_name, member_phone, member_password) VALUES (${name.toString()}, ${userphone.toString()}, ${password.toString()});`
+            return true;
+        } catch (error) {
+            logger.error(error.message);
+            return false;
+        }
+    }
+}
+
+export default UserModel;

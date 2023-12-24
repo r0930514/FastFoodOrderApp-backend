@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt"
+import logger from "../utils/logger.js"
 
 class AuthService{
     static saltRounds = 10

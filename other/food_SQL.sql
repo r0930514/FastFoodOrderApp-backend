@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS public."Member"
     PRIMARY KEY (member_id)
 );
 
+
 -- 點數卡表
 CREATE TABLE IF NOT EXISTS public."Points_Card"
 (
@@ -52,6 +53,7 @@ CREATE TABLE IF NOT EXISTS public."Points_Card"
     PRIMARY KEY (point_card_id),
     FOREIGN KEY (member_id) REFERENCES public."Member" (member_id)
 );
+
 
 -- 點數表
 CREATE TABLE IF NOT EXISTS public."Point_Details"
@@ -151,3 +153,6 @@ CREATE TABLE IF NOT EXISTS public."Order_Details"
 
 
 END;
+
+-- 查找是否有會員（透過電話號碼）
+SELECT * FROM public."Member" WHERE member_phone = '0912345678';

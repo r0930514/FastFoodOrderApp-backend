@@ -1,6 +1,7 @@
 import express from "express"
 import AuthService from "../service/AuthService.js"
-import TestFileService from "../service/TestFileService.js"
+import logger from "../utils/logger.js"
+import UserModel from "../models/UserModel.js"
 
 
 class LoginController {
@@ -11,23 +12,31 @@ class LoginController {
     * @param {express.Response} res 
     */
     static async login(req, res) {
-        const username = req.body.email
+        const username = req.body.userphone
         const password = req.body.password
 
-        const userDB = await TestFileService.fileReadObject()
-
-        // Check if user already exists
-        for (let element of userDB) {
-            if (element.user == username) {
-                const isPasswordCorrect = await AuthService.comparePassword(password, element.password)
-                if (isPasswordCorrect) {
-                    req.session.user = username
-                    res.sendStatus(200)
-                    return
-                }
+        // Check if user exists
+        const userExist = await UserModel.checkUserExist(username)
+        if (userExist != false) {
+            const isPasswordCorrect = await AuthService.comparePassword(password, userExist)
+            if (isPasswordCorrect) {
+                req.session.user = username
+                logger.info(`Login success for user ${username}`)
+                logger.info(req.session.user + " " + req.sessionID)
+                res.sendStatus(200)
+                return
+            }else{
+                logger.warn(`Login failed for user ${username}: Password incorrect`)
+                res.sendStatus(401)
+                return
             }
         }
+        
+        logger.warn(`Login failed for user ${username}`)
         res.sendStatus(401)
     }
+
+    
 }
 export default LoginController
+

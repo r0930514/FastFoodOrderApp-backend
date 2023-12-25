@@ -1,5 +1,4 @@
 import { Router } from "express";
-import session from "express-session"
 import 'dotenv/config'
 import RegisterController from "../controllers/RegisterController.js";
 import LoginController from "../controllers/LoginController.js";

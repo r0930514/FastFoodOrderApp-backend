@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import ProductModel from '../models/ProductModel.js';
+import logger from '../utils/logger.js';
 const productRouter = Router();
 
 productRouter.get('/', (req, res) => {

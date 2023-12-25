@@ -15,8 +15,8 @@ indexRouter.use('/products', productRouter)
 
 
 indexRouter.use('/test', (req, res) => {
-    logger.http("test")
-    res.sendStatus(200)
+    logger.http("test")//輸出log
+    res.sendStatus(201)//回傳代號
 })
 
 export default indexRouter

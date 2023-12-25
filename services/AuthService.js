@@ -1,29 +1,36 @@
-import bcrypt from "bcrypt"
-import logger from "../utils/logger.js"
-
-class AuthService{
-    static saltRounds = 10
-
-    /**
-     * 放入要hash的密碼
-     * @async
-     * @param {String} pwd 
-     * @returns {String} Hash值
-     */
-    static async hashPassword(pwd){
-        return await bcrypt.hash(pwd, this.saltRounds)    
+import jsonwebtoken from "jsonwebtoken";
+import authConfig from "../config/authConfig.js";
+import logger from "../utils/logger.js";
+class AuthService {
+  /**
+   * 
+   * @param {String} username 使用者名稱 
+   * @returns {String | null} 回傳token or null
+   */
+    static generateToken(username) {
+        try {
+            return jsonwebtoken.sign({username: username}, authConfig.secret, {
+                expiresIn: "7d", //token有效期限
+            });
+        }catch(err){
+            logger.warn(err);
+            return null;
+        }
     }
 
     /**
-     * 確認傳來的密碼是否與Hash相同
-     * @async
-     * @param {String} pwd 
-     * @param {String} hashedPwd 
-     * @returns {Boolean} 是否相同
+     * 
+     * @param {String} token 輸入token
+     * @returns {Object} 回傳解碼訊息
      */
-    static async comparePassword(pwd, hashedPwd){
-        return await bcrypt.compare(pwd, hashedPwd)
+    static verifyToken(token) {
+        try {
+            return jsonwebtoken.verify(token, authConfig.secret);
+        }catch(err){
+            logger.warn(err);
+            return null;
+        }
     }
 }
 
-export default AuthService
+export default AuthService;

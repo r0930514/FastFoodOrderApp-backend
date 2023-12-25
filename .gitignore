@@ -3,3 +3,4 @@ private
 logs
 .env
 .DS_Store
+test.js

@@ -13,28 +13,29 @@ class LoginController {
     * @param {express.Response} res 
     */
     static async login(req, res) {
-        const username = req.body.userphone
+        const userphone = req.body.userphone
         const password = req.body.password
 
         // Check if user exists
-        const userExist = await UserModel.checkUserExist(username)
+        const userExist = await UserModel.checkUserExist(userphone)
         if (userExist != false) {
             const isPasswordCorrect = await HashService.comparePassword(password, userExist)
             if (isPasswordCorrect) {
-                logger.info(`Login success for user ${username}`)
+                logger.info(`Login success for user ${userphone}`)
                 res
-                    .header("Authorization", "Bearer " + await AuthService.generateToken(username))    
-                    .sendStatus(200)
+                    .setHeader("Authorization", "Bearer " + await AuthService.generateToken(userphone)) 
+                    .json({userphone: userphone})
+                    .status(200)
                     
                 return
             } else {
-                logger.warn(`Login failed for user ${username}: Password incorrect`)
+                logger.warn(`Login failed for user ${userphone}: Password incorrect`)
                 res.sendStatus(401)
                 return
             }
         }
 
-        logger.warn(`Login failed for user ${username}`)
+        logger.warn(`Login failed for user ${userphone}`)
         res.sendStatus(401)
     }
 

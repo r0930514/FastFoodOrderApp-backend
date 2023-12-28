@@ -11,5 +11,14 @@ productRouter.get('/list', async (req, res) => {
   res.json(result);
 })
 
+//GET /product/:product_id
+//productRouter.get('/:product_id', ProductController.getProductById);
+productRouter.get('/:product_id', async (req, res) => {
+    const productId = req.params.product_id;
+    const product = await ProductModel.getProductById(productId);
+    res.json(product);
+});
+
+
 
 export default productRouter;

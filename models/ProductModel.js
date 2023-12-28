@@ -2,8 +2,6 @@ import DatabaseService from '../services/DatabaseService.js';
 import classify from '../utils/classify.js';
 import logger from '../utils/logger.js';
 
-
-
 class ProductModel {
     /**
      * @async
@@ -19,6 +17,20 @@ class ProductModel {
         }
     }
 
+    static async getProductById(productID) 
+    {
+        try 
+        {
+            const productData = await DatabaseService.sql`SELECT * FROM public."Products" WHERE product_id = ${productID}`;
+            return productData;
+        } 
+        catch (error) 
+        {
+            logger.error(error.message);
+            throw new Error('獲取produc_id失敗');
+        }   
+        //const productID = await DatabaseService.sql`SELECT * FROM public."Products" ORDER BY product_class ASC;`;
+    }
 }
 
 export default ProductModel;

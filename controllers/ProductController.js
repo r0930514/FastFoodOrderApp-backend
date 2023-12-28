@@ -1,4 +1,5 @@
 import ProductModel from '../models/ProductModel.js';
+import logger from '../utils/logger.js';
 
 class ProductController 
 {
@@ -13,19 +14,12 @@ class ProductController
     {
       const productId = req.params.product_id;
       const product = await ProductModel.getProductById(productId);
-
-      if (product) 
-      {
-        res.json(product);
-      }
-      else 
-      {
-        res.status(404).json({ message: 'none' });
-      }
+      if (product.length>0) res.json(product);
+      else res.status(404).send('Not found');
     } 
     catch (error) 
     {
-      console.error(error);
+      logger.error(error.message);
       res.status(500).send('Error');
     }
   }

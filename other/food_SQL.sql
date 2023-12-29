@@ -31,6 +31,267 @@ CREATE TABLE IF NOT EXISTS public."Products_Specification"
     FOREIGN KEY (product_id) REFERENCES public."Products" (product_id)
 );
 
+/*
+我們的產品有這些
+[
+    [
+        {
+            "product_id": 4,
+            "product_name": "經典漢堡套餐",
+            "image_URL": "1.jpg",
+            "making_time": "00:10:00",
+            "product_price": "$150.00",
+            "product_illustrate": "經典漢堡和薯條與飲料的最好搭配",
+            "product_class": "主打套餐"
+        },
+        {
+            "product_id": 5,
+            "product_name": "經典漢堡套餐",
+            "image_URL": "1.jpg",
+            "making_time": "00:10:00",
+            "product_price": "$150.00",
+            "product_illustrate": "經典漢堡和薯條與飲料的最好搭配",
+            "product_class": "主打套餐"
+        },
+        {
+            "product_id": 7,
+            "product_name": "墨西哥捲餅套餐",
+            "image_URL": "3.jpg",
+            "making_time": "00:10:00",
+            "product_price": "$150.00",
+            "product_illustrate": "墨西哥捲餅和玉米片與飲料的最好搭配",
+            "product_class": "主打套餐"
+        },
+        {
+            "product_id": 6,
+            "product_name": "炸雞腿堡套餐",
+            "image_URL": "2.jpg",
+            "making_time": "00:10:00",
+            "product_price": "$150.00",
+            "product_illustrate": "炸雞腿堡和沙拉與飲料的最好搭配",
+            "product_class": "主打套餐"
+        }
+    ],
+    [
+        {
+            "product_id": 9,
+            "product_name": "炸雞腿堡",
+            "image_URL": "5.jpg",
+            "making_time": "00:05:00",
+            "product_price": "$80.00",
+            "product_illustrate": "香脆炸雞腿",
+            "product_class": "漢堡"
+        },
+        {
+            "product_id": 10,
+            "product_name": "素食漢堡",
+            "image_URL": "6.jpg",
+            "making_time": "00:05:00",
+            "product_price": "$80.00",
+            "product_illustrate": "素食漢堡排",
+            "product_class": "漢堡"
+        },
+        {
+            "product_id": 8,
+            "product_name": "經典漢堡",
+            "image_URL": "4.jpg",
+            "making_time": "00:05:00",
+            "product_price": "$80.00",
+            "product_illustrate": "100%純牛肉漢堡",
+            "product_class": "漢堡"
+        }
+    ],
+    [
+        {
+            "product_id": 11,
+            "product_name": "香脆炸雞腿",
+            "image_URL": "7.jpg",
+            "making_time": "00:05:00",
+            "product_price": "$80.00",
+            "product_illustrate": "選擇醬料：原味、辣味、蜂蜜芥末",
+            "product_class": "炸雞"
+        },
+        {
+            "product_id": 12,
+            "product_name": "炸雞塊",
+            "image_URL": "8.jpg",
+            "making_time": "00:05:00",
+            "product_price": "$80.00",
+            "product_illustrate": "小塊炸雞，適合分享",
+            "product_class": "炸雞"
+        }
+    ],
+    [
+        {
+            "product_id": 13,
+            "product_name": "墨西哥捲餅",
+            "image_URL": "9.jpg",
+            "making_time": "00:05:00",
+            "product_price": "$80.00",
+            "product_illustrate": "選擇肉類或素食",
+            "product_class": "捲餅"
+        }
+    ],
+    [
+        {
+            "product_id": 14,
+            "product_name": "水果雞肉沙拉",
+            "image_URL": "10.jpg",
+            "making_time": "00:05:00",
+            "product_price": "$80.00",
+            "product_illustrate": "新鮮水果",
+            "product_class": "沙拉"
+        },
+        {
+            "product_id": 15,
+            "product_name": "凱撒沙拉",
+            "image_URL": "11.jpg",
+            "making_time": "00:05:00",
+            "product_price": "$80.00",
+            "product_illustrate": "生菜",
+            "product_class": "沙拉"
+        }
+    ],
+    [
+        {
+            "product_id": 17,
+            "product_name": "洋蔥圈",
+            "image_URL": "13.jpg",
+            "making_time": "00:05:00",
+            "product_price": "$80.00",
+            "product_illustrate": "酥脆的洋蔥圈",
+            "product_class": "小吃"
+        },
+        {
+            "product_id": 16,
+            "product_name": "薯條",
+            "image_URL": "12.jpg",
+            "making_time": "00:05:00",
+            "product_price": "$80.00",
+            "product_illustrate": "選擇香脆或鬆軟口感",
+            "product_class": "小吃"
+        }
+    ],
+    [
+        {
+            "product_id": 18,
+            "product_name": "汽水",
+            "image_URL": "14.jpg",
+            "making_time": "00:05:00",
+            "product_price": "$55.00",
+            "product_illustrate": "可樂、雪碧、蘋果西打等選擇",
+            "product_class": "飲料"
+        },
+        {
+            "product_id": 19,
+            "product_name": "冰紅茶",
+            "image_URL": "15.jpg",
+            "making_time": "00:05:00",
+            "product_price": "$50.00",
+            "product_illustrate": "選擇甜度：全糖、半糖、無糖",
+            "product_class": "飲料"
+        },
+        {
+            "product_id": 20,
+            "product_name": "果汁",
+            "image_URL": "16.jpg",
+            "making_time": "00:05:00",
+            "product_price": "$70.00",
+            "product_illustrate": "柳橙汁、蘋果汁、葡萄汁等",
+            "product_class": "飲料"
+        }
+    ],
+    [
+        {
+            "product_id": 22,
+            "product_name": "冰淇淋圓筒",
+            "image_URL": "18.jpg",
+            "making_time": "00:05:00",
+            "product_price": "$80.00",
+            "product_illustrate": "選擇口味：香草、巧克力、草莓",
+            "product_class": "甜點"
+        },
+        {
+            "product_id": 21,
+            "product_name": "蛋糕捲",
+            "image_URL": "17.jpg",
+            "making_time": "00:05:00",
+            "product_price": "$80.00",
+            "product_illustrate": "選擇口味：巧克力、草莓、抹茶",
+            "product_class": "甜點"
+        }
+    ]
+]
+請幫我們生成這些產品的一些規格
+insert into public."Products_Specification" (product_id, specification_name) values (5, '加大薯條'); 
+insert into public."Products_Specification" (product_id, specification_name) values (5, '加冰淇淋'); 
+insert into public."Products_Specification" (product_id, specification_name) values (5, '不要洋蔥'); 
+insert into public."Products_Specification" (product_id, specification_name) values (7, '加大薯條'); 
+insert into public."Products_Specification" (product_id, specification_name) values (7, '加冰淇淋'); 
+insert into public."Products_Specification" (product_id, specification_name) values (7, '不要洋蔥'); 
+insert into public."Products_Specification" (product_id, specification_name) values (6, '加大薯條'); 
+insert into public."Products_Specification" (product_id, specification_name) values (6, '加冰淇淋'); 
+insert into public."Products_Specification" (product_id, specification_name) values (6, '不要洋蔥'); 
+insert into public."Products_Specification" (product_id, specification_name) values (4, '加大薯條'); 
+insert into public."Products_Specification" (product_id, specification_name) values (4, '加冰淇淋'); 
+insert into public."Products_Specification" (product_id, specification_name) values (4, '不要洋蔥'); 
+insert into public."Products_Specification" (product_id, specification_name) values (9, '加大薯條'); 
+insert into public."Products_Specification" (product_id, specification_name) values (9, '加冰淇淋'); 
+insert into public."Products_Specification" (product_id, specification_name) values (9, '不要洋蔥'); 
+insert into public."Products_Specification" (product_id, specification_name) values (10, '加大薯條'); 
+insert into public."Products_Specification" (product_id, specification_name) values (10, '加冰淇淋'); 
+insert into public."Products_Specification" (product_id, specification_name) values (10, '不要洋蔥'); 
+insert into public."Products_Specification" (product_id, specification_name) values (8, '加大薯條'); 
+insert into public."Products_Specification" (product_id, specification_name) values (8, '加冰淇淋'); 
+insert into public."Products_Specification" (product_id, specification_name) values (8, '不要洋蔥'); 
+insert into public."Products_Specification" (product_id, specification_name) values (11, '一般'); 
+insert into public."Products_Specification" (product_id, specification_name) values (11, '辣味'); 
+insert into public."Products_Specification" (product_id, specification_name) values (11, '蜂蜜芥末'); 
+insert into public."Products_Specification" (product_id, specification_name) values (12, '一般'); 
+insert into public."Products_Specification" (product_id, specification_name) values (12, '辣味'); 
+insert into public."Products_Specification" (product_id, specification_name) values (12, '蜂蜜芥末'); 
+insert into public."Products_Specification" (product_id, specification_name) values (13, '一般'); 
+insert into public."Products_Specification" (product_id, specification_name) values (13, '辣味'); 
+insert into public."Products_Specification" (product_id, specification_name) values (13, '蜂蜜芥末'); 
+insert into public."Products_Specification" (product_id, specification_name) values (14, '一般'); 
+insert into public."Products_Specification" (product_id, specification_name) values (15, '一般'); 
+insert into public."Products_Specification" (product_id, specification_name) values (17, '一般'); 
+insert into public."Products_Specification" (product_id, specification_name) values (16, '一般'); 
+insert into public."Products_Specification" (product_id, specification_name) values (18, '一般'); 
+insert into public."Products_Specification" (product_id, specification_name) values (18, '半糖'); 
+insert into public."Products_Specification" (product_id, specification_name) values (18, '無糖'); 
+insert into public."Products_Specification" (product_id, specification_name) values (19, '一般'); 
+insert into public."Products_Specification" (product_id, specification_name) values (19, '半糖'); 
+insert into public."Products_Specification" (product_id, specification_name) values (19, '無糖'); 
+insert into public."Products_Specification" (product_id, specification_name) values (20, '一般'); 
+insert into public."Products_Specification" (product_id, specification_name) values (20, '半糖'); 
+insert into public."Products_Specification" (product_id, specification_name) values (20, '無糖'); 
+insert into public."Products_Specification" (product_id, specification_name) values (22, '一般'); 
+insert into public."Products_Specification" (product_id, specification_name) values (22, '巧克力'); 
+insert into public."Products_Specification" (product_id, specification_name) values (22, '草莓'); 
+insert into public."Products_Specification" (product_id, specification_name) values (21, '一般'); 
+insert into public."Products_Specification" (product_id, specification_name) values (21, '巧克力'); 
+insert into public."Products_Specification" (product_id, specification_name) values (21, '草莓'); 
+
+檢查是否所有產品都有一個自己的規格
+select * from public."Products" left join public."Products_Specification" on public."Products".product_id = public."Products_Specification".product_id;
+
+data = 檢查使用者最新的訂單
+	data.沒有付款的話：
+		回傳 訂單ID //這筆訂單就是他的購物車
+
+	data.已經付款的話 or data不存在
+		新建一個新訂單 //建一個新的訂單去當他的購物車
+		回傳 剛剛新建訂單的ID
+SELECT * FROM public."Orders" WHERE member_id = 1 AND payment_id IS NULL;
+INSERT INTO public."Orders" (member_id, order_date, order_type) VALUES (1, '2021-06-01', 'Dine_In');
+
+
+
+
+
+*/
+
 
 
 -- 會員表

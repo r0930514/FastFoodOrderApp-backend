@@ -17,19 +17,21 @@ class ProductModel {
         }
     }
 
+    /**
+     * @async
+     * @param {String} productID 
+     * @returns {Object} 回傳該產品的資料
+     */
     static async getProductById(productID) 
     {
-        try 
-        {
+        try {
             const productData = await DatabaseService.sql`SELECT * FROM public."Products" WHERE product_id = ${productID}`;
             return productData;
         } 
-        catch (error) 
-        {
+        catch (error) {
             logger.error(error.message);
             throw new Error('獲取produc_id失敗');
         }   
-        //const productID = await DatabaseService.sql`SELECT * FROM public."Products" ORDER BY product_class ASC;`;
     }
 }
 

@@ -13,8 +13,13 @@ class ProductController
     try 
     {
       const productId = req.params.product_id;
-      const product = await ProductModel.getProductById(productId);
-      if (product.length>0) res.json(product);
+      const products = await ProductModel.getProductById(productId);
+      const spec = await ProductModel.getSpecById(productId);
+      for(let product of products)
+      {
+        product.spec = spec;
+      }
+      if (products.length>0) res.json(products);
       else res.status(404).send('Not found');
     } 
     catch (error) 

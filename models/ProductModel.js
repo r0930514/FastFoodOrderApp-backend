@@ -33,6 +33,24 @@ class ProductModel {
             throw new Error('獲取produc_id失敗');
         }   
     }
+
+    /**
+     * 取得產品規格
+     * @async
+     * @param {String} productID
+     * @returns {Object} 回傳該產品的規格
+     */
+    static async getSpecById(productID) 
+    {
+        try {
+            const specData = await DatabaseService.sql`SELECT "specification_id", "specification_name" FROM public."Products_Specification" WHERE product_id = ${productID};`;
+            return specData;
+        } 
+        catch (error) {
+            logger.error(error.message);
+            throw 'specData 取得失敗';
+        }   
+    }
 }
 
 export default ProductModel;

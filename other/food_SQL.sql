@@ -286,6 +286,8 @@ data = 檢查使用者最新的訂單
 SELECT * FROM public."Orders" WHERE member_id = 1 AND payment_id IS NULL;
 INSERT INTO public."Orders" (member_id, order_date, order_type) VALUES (1, '2021-06-01', 'Dine_In');
 
+給定product_id 回傳該產品的規格 我只要specification_name 和 specification_id
+SELECT * FROM public."Products_Specification"(product_id) WHERE product_id = 1;
 
 
 

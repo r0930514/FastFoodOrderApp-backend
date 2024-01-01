@@ -357,8 +357,7 @@ CREATE TABLE IF NOT EXISTS public."Orders"
     PRIMARY KEY (order_id),
     FOREIGN KEY (member_id) REFERENCES public."Member" (member_id),
     FOREIGN KEY (payment_id) REFERENCES public."Payment" (payment_id)
-);
-    
+);    
     -- 訂單->內用表
     CREATE TABLE IF NOT EXISTS public."Dine_In"
     (
@@ -381,6 +380,7 @@ CREATE TABLE IF NOT EXISTS public."Orders"
         PRIMARY KEY (takeout_id),
         FOREIGN KEY (order_id) REFERENCES public."Orders" (order_id)
     );
+    INSERT INTO public."Takeout" (order_id, takeout_type, meal_note, meal_type) VALUES (1, 'Online', '不要洋蔥', '午餐');
 
         -- 訂單->外帶->線上點餐
         CREATE TABLE IF NOT EXISTS public."Online"
@@ -390,6 +390,7 @@ CREATE TABLE IF NOT EXISTS public."Orders"
             PRIMARY KEY (online_id),
             FOREIGN KEY (takeout_id) REFERENCES public."Takeout" (takeout_id)
         );
+        
        
 
 
@@ -409,11 +410,14 @@ CREATE TABLE IF NOT EXISTS public."Order_Details"
     order_id integer NOT NULL,
     product_id integer NOT NULL,
     specification_id integer NOT NULL,
+    count integer NOT NULL,
     PRIMARY KEY (order_detail_id),
     FOREIGN KEY (order_id) REFERENCES public."Orders" (order_id),
     FOREIGN KEY (product_id) REFERENCES public."Products" (product_id),
     FOREIGN KEY (specification_id) REFERENCES public."Products_Specification" (specification_id)
 );
+
+INSERT INTO public."Order_Details" (order_id, product_id, specification_id, count) VALUES (1, 1, 1, 1);
 
 
 

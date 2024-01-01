@@ -33,6 +33,22 @@ class UserModel {
             return false;
         }
     }
+
+    /**
+     * 回傳用戶ID
+     * @param {String} userphone 
+     * @returns {String} 回傳用戶ID
+     */
+    static async returnUserID(userphone) {
+        try {
+            let result = await DatabaseSercie.sql`SELECT member_id FROM public."Member" WHERE member_phone = ${userphone};`
+            if (result.length == 0) throw new Error("No such user");
+            return result[0].member_id;
+        } catch (error) {
+            logger.warn(error.message);
+            throw error;
+        }
+    }
 }
 
 export default UserModel;

@@ -4,6 +4,7 @@ import userRouter from "./user.js"
 import newsRouter from "./news.js"
 import logger from "../utils/logger.js"
 import productRouter from "./product.js"
+import orderRouter from "./order.js"
 //orderRouter先做好才能index.js引導過去 
 const indexRouter = Router()
 
@@ -13,6 +14,7 @@ indexRouter.use('/static', express.static('./static'))
 indexRouter.use('/user', userRouter)
 indexRouter.use('/news', newsRouter)
 indexRouter.use('/products', productRouter)
+indexRouter.use('/order', orderRouter)
 
 
 indexRouter.use('/test', (req, res) => {

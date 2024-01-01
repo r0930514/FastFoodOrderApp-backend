@@ -21,7 +21,7 @@ class AuthService {
     /**
      * 
      * @param {String} token 輸入token
-     * @returns {Object} 回傳解碼訊息
+     * @returns {import("jsonwebtoken").JwtPayload} 回傳解碼訊息
      */
     static verifyToken(token) {
         try {

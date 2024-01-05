@@ -92,7 +92,7 @@ class CardModel
         {
             logger.info("point_DetalsFromMember")
             const query = await DatabaseService.sql`SELECT * FROM public."Point_Details" WHERE point_id = ${point_id}`;
-            const pointDetals = await query
+            const pointDetals = query
             return pointDetals
         }
         catch(error)

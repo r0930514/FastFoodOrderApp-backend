@@ -10,6 +10,6 @@ orderRouter.use(authMiddeleware);
 orderRouter.post("/add", OrderController.addOrder);
 
 //取得這個會員的所有訂單的詳細資料
-orderRouter.get("/get", OrderController.getOrder);
+orderRouter.get("/", OrderController.getOrder);
 
 export default orderRouter;

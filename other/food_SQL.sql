@@ -419,6 +419,15 @@ CREATE TABLE IF NOT EXISTS public."Order_Details"
 
 INSERT INTO public."Order_Details" (order_id, product_id, specification_id, count) VALUES (1, 1, 1, 1);
 
+-- 印出此筆訂單的所有訂單明細
+SELECT * FROM public."Order_Details" WHERE order_id = 1;
+-- 印出此筆訂單的所有訂單明細的產品名稱
+SELECT * FROM public."Order_Details" 
+WHERE order_id = 1 
+LEFT JOIN public."Products" 
+ON public."Order_Details".product_id = public."Products".product_id;
+
+
 
 
 END;

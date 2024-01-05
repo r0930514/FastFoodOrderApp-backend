@@ -29,9 +29,41 @@ class OrderModel{
             }else{
                 throw new Error("order_type.type錯誤");
             }
-            logger.warn(`會員ID:${member_id} 新增訂單成功，訂單編號：${order_id}`)
+            logger.warn(`會員ID：${member_id} 新增訂單成功，訂單ID：${order_id}`)
 
         }catch(e){
+            logger.error(e.message);
+            throw e;
+        }
+    }
+
+    /**
+     * 簡單查詢某筆訂單的詳細資料
+     * @param {String} order_id 提供訂單ID以供查詢
+     */
+    static async getOrderDetail(order_id){
+        try {
+            const order = await DatabaseService.sql`
+                SELECT order_detail_id, "Products".product_id, "Products".product_name, product_count, "Products".product_price, ("Products".product_price*product_count)as "total"
+                FROM public."Order_Details" 
+                LEFT JOIN public."Products"
+                ON public."Order_Details".product_id = public."Products".product_id
+                WHERE order_id = ${order_id};
+            `
+            return order;
+        } catch (e) {
+            logger.error(e.message);
+            throw e;
+        }
+    }
+    
+    static async getOrderByMemberID(member_id){
+        try {
+            const order = await DatabaseService.sql`
+                SELECT * FROM public."Orders" WHERE member_id = ${member_id};
+            `
+            return order;
+        } catch (e) {
             logger.error(e.message);
             throw e;
         }

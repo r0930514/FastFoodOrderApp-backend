@@ -7,7 +7,7 @@ class CardModel
 {
     static async test()
     {
-        logger.error("test")
+        logger.info("test")
         DatabaseService.test()
     }
     //1. 用會員ID去搜尋這個會員的會員卡ID
@@ -18,7 +18,7 @@ class CardModel
             const query = await DatabaseService.sql`SELECT point_card_id FROM public."Points_Card" WHERE member_id = ${memberID}`;
             const memberCard = query;
             return memberCard;
-        } 
+        }
         catch (error)
         {
             logger.error(error);
@@ -51,7 +51,7 @@ class CardModel
             const sql = `INSERT INTO table_name (col1, col2, col3) VALUES ("value1", "value2", "${datetime}")`;*/
         try
         {
-            logger.error("addPointsToMember");
+            logger.info("addPointsToMember");
             const currentDate = new Date();
             const nextYear = new Date(currentDate.getFullYear()+1,currentDate.getMonth(),currentDate.getDate());
             const query = await DatabaseService.sql`UPDATE Point_Details SET point_counts = point_counts + ${pointsToAdd}, point_expired_date = ${nextYear.toISOString().slice(0,10)} WHERE member_id = ${memberID}`;
@@ -69,7 +69,7 @@ class CardModel
     {
         try 
         {
-            logger.error("deductPointsFromMember");
+            logger.info("deductPointsFromMember");
 
             const query = await DatabaseService.sql`UPDATE Point_Details SET point_counts = point_counts - ${pointsToDeduct}WHERE member_id = ${memberID} AND point_counts >= ${pointsToDeduct}`;
             const rowsAffected = await query;
@@ -90,7 +90,7 @@ class CardModel
     {
         try
         {
-            logger.error("point_DetalsFromMember")
+            logger.info("point_DetalsFromMember")
             const query = await DatabaseService.sql`SELECT * FROM public."Point_Details" WHERE point_id = ${point_id}`;
             const pointDetals = await query
             return pointDetals
@@ -109,7 +109,7 @@ class CardModel
     {
         try
         {
-            logger.error("oneCardOneMember")
+            logger.info("oneCardOneMember")
             const query = ``
             const CardMember = await query
             return CardMember
@@ -123,6 +123,7 @@ class CardModel
         }
     }
     //6. 用會員ID去刪掉他的會員卡
+    
 
 }
 

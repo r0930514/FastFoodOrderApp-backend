@@ -21,7 +21,7 @@ class OrderController {
             const userID = await UserModel.returnUserID(jwt.username);
             const order = req.body.orders;
             const type = req.body.type;
-            OrderModel.sendOrder(order, type, userID);
+            await OrderModel.sendOrder(order, type, userID);
             res.sendStatus(200);
         } catch (e) {
             logger.error(e.message);

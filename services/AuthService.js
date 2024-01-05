@@ -25,7 +25,8 @@ class AuthService {
      */
     static verifyToken(token) {
         try {
-            return jsonwebtoken.verify(token, authConfig.secret);
+            const verify = jsonwebtoken.verify(token, authConfig.secret);
+            return verify
         }catch(err){
             logger.warn(err);
             return null;

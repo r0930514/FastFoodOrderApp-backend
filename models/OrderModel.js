@@ -18,7 +18,7 @@ class OrderModel{
             const order_id = (await DatabaseService.sql`INSERT INTO public."Orders" (member_id, order_date, order_type) VALUES (${member_id}, ${time}, ${order_type.type}) RETURNING order_id;`)[0].order_id
             // 將訂單明細寫入資料庫
             for(let order of orders){
-                await DatabaseService.sql`INSERT INTO public."Order_Details" (order_id, product_id, specification_id, product_count) VALUES (${order_id}, ${order.product_id}, ${order.specification_id}, ${order.count});`;
+                await DatabaseService.sql`INSERT INTO public."Order_Details" (order_id, product_id, specification_id, product_count) VALUES (${order_id}, ${parseInt(order.product_id)}, ${parseInt(order.specification_id)}, ${order.count});`;
             }
 
             // 根據訂單類型寫入資料庫
@@ -29,7 +29,7 @@ class OrderModel{
             }else{
                 throw new Error("order_type.type錯誤");
             }
-            logger.info(order_id + " 訂單已建立");
+            logger.warn(`會員ID:${member_id} 新增訂單成功，訂單編號：${order_id}`)
 
         }catch(e){
             logger.error(e.message);

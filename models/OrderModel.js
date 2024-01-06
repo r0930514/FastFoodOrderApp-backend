@@ -11,11 +11,11 @@ class OrderModel{
      * @param {Object} order_type 訂單類型物件
      * @param {Number} member_id 會員ID
      * */
-    static async sendOrder(orders, order_type, member_id){
+    static async sendOrder(orders, order_type, member_id, notify_token){
         const time = getTime();
         try{
             // 建立訂單
-            const order_id = (await DatabaseService.sql`INSERT INTO public."Orders" (member_id, order_date, order_type) VALUES (${member_id}, ${time}, ${order_type.type}) RETURNING order_id;`)[0].order_id
+            const order_id = (await DatabaseService.sql`INSERT INTO public."Orders" (member_id, order_date, order_type, order_notify_token) VALUES (${member_id}, ${time}, ${order_type.type}, ${notify_token}) RETURNING order_id;`)[0].order_id
             // 將訂單明細寫入資料庫
             for(let order of orders){
                 await DatabaseService.sql`INSERT INTO public."Order_Details" (order_id, product_id, specification_id, product_count) VALUES (${order_id}, ${parseInt(order.product_id)}, ${parseInt(order.specification_id)}, ${order.count});`;

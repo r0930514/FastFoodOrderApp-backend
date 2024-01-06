@@ -13,10 +13,10 @@ class OrderController {
         try {
             // 取得從中間件過來的userID
             const userID = req.userID;
-
             const order = req.body.orders;
             const type = req.body.type;
-            await OrderModel.sendOrder(order, type, userID);
+            const notify_token = req.body.notify_token;
+            await OrderModel.sendOrder(order, type, userID, notify_token);
             res.sendStatus(200);
         } catch (e) {
             logger.error(e.message);

@@ -78,6 +78,21 @@ class OrderModel{
             throw e;
         }
     }
+    /**
+     *  將訂單勾選為完成
+     */
+    static async doneOrder(order_id){
+        try {
+            const result = await DatabaseService.sql`
+            UPDATE public."Orders" SET order_status = true WHERE order_id = ${order_id} RETURNING order_notify_token;
+            `
+            return result;
+            
+        } catch (e) {
+            logger.error(e.message);
+            throw e;
+        }
+    }
 }
 
 export default OrderModel;

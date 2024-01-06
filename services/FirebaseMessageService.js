@@ -36,4 +36,4 @@ class FirebaseMessageService{
     }
 }
 
-export default FirebaseMessageService;
+export default new FirebaseMessageService();

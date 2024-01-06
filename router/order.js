@@ -12,4 +12,7 @@ orderRouter.post("/add", OrderController.addOrder);
 //取得這個會員的所有訂單的詳細資料
 orderRouter.get("/", OrderController.getOrder);
 
+//完成這筆訂單
+orderRouter.put("/done/:order_id", OrderController.doneOrder);
+
 export default orderRouter;

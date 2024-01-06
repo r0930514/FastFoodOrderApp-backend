@@ -1,6 +1,7 @@
 import express from 'express';
 import logger from '../utils/logger.js';
 import OrderModel from '../models/OrderModel.js';
+import FirebaseMessageService from '../services/FirebaseMessageService.js';
 
 class OrderController {
     /**
@@ -36,6 +37,32 @@ class OrderController {
                 order.order_detail = await OrderModel.getOrderDetail(order.order_id);
             }
             res.send(orders).status(200);
+        } catch (e) {
+            logger.error(e.message);
+            res.sendStatus(500);
+        }
+    }
+
+    /**
+     * 完成訂單
+     */
+    static async doneOrder(req, res) {
+        try {
+            const order_id = req.params.order_id;
+            const userID = req.userID;
+            logger.warn(userID)
+            // 40是管理員的ID
+            if(userID != 40) {
+                res.sendStatus(401)
+                return;
+            };
+            const notify_token = (await OrderModel.doneOrder(order_id))[0].order_notify_token;
+            await FirebaseMessageService.sendMessage(notify_token, {
+                title: '訂單已完成',
+                body: `您的訂單${order_id}已完成`
+            })
+
+            res.sendStatus(200);
         } catch (e) {
             logger.error(e.message);
             res.sendStatus(500);

@@ -51,14 +51,14 @@ class OrderModel{
                     "Order_Details".specification_id,
                     "Products_Specification".specification_name,
                     product_count, 
-                    "Products".product_price, 
-                    ("Products".product_price*product_count)as "total"
+                    "Products".product_price::money::numeric::float8, 
+                    ("Products".product_price*product_count)::money::numeric::float8 as "total"
                 FROM public."Order_Details" 
                 LEFT JOIN public."Products"
                 ON public."Order_Details".product_id = public."Products".product_id
                 INNER JOIN public."Products_Specification"
                 ON "Order_Details".specification_id = "Products_Specification".specification_id
-                WHERE order_id = ${order_id};
+                WHERE order_id = ${order_id}
             `
             return order;
         } catch (e) {
@@ -70,7 +70,7 @@ class OrderModel{
     static async getOrderByMemberID(member_id){
         try {
             const order = await DatabaseService.sql`
-                SELECT * FROM public."Orders" WHERE member_id = ${member_id};
+                SELECT * FROM public."Orders" WHERE member_id = ${member_id} ORDER BY order_date DESC;
             `
             return order;
         } catch (e) {

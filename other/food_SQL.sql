@@ -434,3 +434,7 @@ END;
 
 -- 查找是否有會員（透過電話號碼）
 SELECT * FROM public."Member" WHERE member_phone = '0912345678';
+
+//請透過以上的SQL語法 幫我做一個可以查詢沒有訂單明細的訂單
+SELECT * FROM public."Orders" 
+WHERE order_id NOT IN (SELECT order_id FROM public."Order_Details");

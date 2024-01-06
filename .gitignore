@@ -4,3 +4,4 @@ logs
 .env
 .DS_Store
 test.js
+serviceAccountKey.js

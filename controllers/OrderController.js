@@ -44,13 +44,36 @@ class OrderController {
     }
 
     /**
+     * admin用的查詢全部訂單
+     */
+    static async getAllOrder(req, res) {
+        try {
+            const orders = await OrderModel.getOrderByAdmin();
+            const userID = req.userID;
+            // 40是管理員的ID
+            if(userID != 40) {
+                res.sendStatus(401)
+                return;
+            };
+
+            for (let order of orders) {
+                order.order_detail = await OrderModel.getOrderDetail(order.order_id);
+            }
+            res.send(orders).status(200);
+        } catch (e) {
+            logger.error(e.message);
+            res.sendStatus(500);
+        }
+    }
+
+
+    /**
      * 完成訂單
      */
     static async doneOrder(req, res) {
         try {
             const order_id = req.params.order_id;
             const userID = req.userID;
-            logger.warn(userID)
             // 40是管理員的ID
             if(userID != 40) {
                 res.sendStatus(401)
@@ -68,6 +91,8 @@ class OrderController {
             res.sendStatus(500);
         }
     }
+
+
 }
 
 export default OrderController;

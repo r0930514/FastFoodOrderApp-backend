@@ -78,6 +78,18 @@ class OrderModel{
             throw e;
         }
     }
+    static async getOrderByAdmin(){
+        try {
+            const order = await DatabaseService.sql`
+                SELECT * FROM public."Orders" 
+                ORDER BY order_status ASC, order_date DESC;
+            `
+            return order;
+        } catch (e) {
+            logger.error(e.message);
+            throw e;
+        }
+    }
     /**
      *  將訂單勾選為完成
      */
